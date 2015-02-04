@@ -22,9 +22,13 @@ Item {
         MouseArea {
             id: mapMouseArea
             anchors.fill: parent
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
             onDoubleClicked: {
-//                map.center = mouse.coordinate;
-                zoomInAction.trigger();
+                map.center = map.toCoordinate(Qt.point(mouse.x, mouse.y))
+                if (mouse.button === Qt.LeftButton){
+                    zoomInAction.trigger();
+                } else if (mouse.button === Qt.RightButton)
+                    zoomOutAction.trigger();
             }
         }
     }
@@ -36,7 +40,6 @@ Item {
         enabled: (map.zoomLevel < map.maximumZoomLevel)
         onTriggered: {
             map.zoomLevel += 1;
-//            console.log("zoomInAction", map.minimumZoomLevel, map.zoomLevel, map.maximumZoomLevel);
         }
     }
 
@@ -47,7 +50,6 @@ Item {
         enabled: (map.zoomLevel > map.minimumZoomLevel)
         onTriggered: {
             map.zoomLevel -= 1;
-//            console.log("zoomOutAction", map.minimumZoomLevel, map.zoomLevel, map.maximumZoomLevel);
         }
     }
 
@@ -127,12 +129,12 @@ Item {
             zoomInAction.trigger();
         } else if (event.key === Qt.Key_Minus) {
             zoomOutAction.trigger();
-        } else if (event.key === Qt.Key_T) {
-            if (map.activeMapType === MapType.StreetMap) {
-                map.activeMapType = MapType.SatelliteMapDay;
-            } else if (map.activeMapType === MapType.SatelliteMapDay) {
-                map.activeMapType = MapType.StreetMap;
-            }
+//        } else if (event.key === Qt.Key_T) {
+//            if (map.activeMapType === MapType.StreetMap) {
+//                map.activeMapType = MapType.SatelliteMapDay;
+//            } else if (map.activeMapType === MapType.SatelliteMapDay) {
+//                map.activeMapType = MapType.StreetMap;
+//            }
         }
     }
 }

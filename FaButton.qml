@@ -83,6 +83,7 @@ Rectangle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true
         onClicked: parent.clicked();
         onDoubleClicked: { } // Keep the map from getting this event.
