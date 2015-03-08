@@ -3,11 +3,15 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtLocation 5.3
 import QtPositioning 5.2
+import "." as App
 
 Item {
-    id: root
+    id: mapTop
+
     width: 640
     height: 480
+
+    anchors.fill: parent
     focus: true
 
     Map {
@@ -86,7 +90,7 @@ Item {
                 onValueChanged: map.zoomLevel = value
             }
 
-            FaButton {
+            App.FaButton {
                 id: zoomInButton
                 anchors.horizontalCenter: parent.horizontalCenter
                 dimmed: !zoomInAction.enabled
@@ -94,7 +98,7 @@ Item {
                 onClicked: zoomInAction.trigger();
             }
 
-            FaButton {
+            App.FaButton {
                 id: zoomOutButton
                 anchors.horizontalCenter: parent.horizontalCenter
                 dimmed: !zoomOutAction.enabled
@@ -135,6 +139,8 @@ Item {
 //            } else if (map.activeMapType === MapType.SatelliteMapDay) {
 //                map.activeMapType = MapType.StreetMap;
 //            }
+        } else {
+            App.Actions.keyPressed(event, mapTop);
         }
     }
 }

@@ -2,18 +2,24 @@ import QtQuick 2.4
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
+import "." as App
 
 Rectangle {
     id: faButton
-    property var awesome: FontAwesome { }
-    property var fa: awesome.icons
+
+    property var awesome: App.FontAwesome
+    property var fa: App.FontAwesome.icons
+
     property bool dimmed: false
+
     width: 40
     height: 40
+
     color: "white"
     border.width: 1
     border.color: "#666666"
     radius: 4
+
     layer.enabled: true
     layer.effect: DropShadow {
         color: Qt.rgba(0, 0, 0, 0.3)
